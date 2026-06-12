@@ -8,7 +8,7 @@
 #     return yangisi
 # print(string_k("banana", "an")) 
 
-#10 - masala
-def string36(S1, S2, S3):
-    return S1.replace(S2, S3, 1)
-print(string36("banana", "an", "xy"))
+# #10 - masala
+# def string36(S1, S2, S3):
+#     return S1.replace(S2, S3, 1)
+# print(string36("banana", "an", "xy"))
