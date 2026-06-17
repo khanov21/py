@@ -1,171 +1,283 @@
 import time
-#1 - Masala
-def decrator(func):
+
+# 1-masala
+def decorator(func):
     def wrapper():
-        print("---START---")
+        print("START")
         func()
-        print("---END---")
+        print("END")
     return wrapper
 
-#2 - masala
-# def show_args(func):
-#     def wrapper(*args):
-#         print("Args: ", args)
-#         return func(*args)
-#     return wrapper
+@decorator
+def salom():
+    print("Salom")
 
-#3 - masala
-# def get_double(func):
-#     def wrapper():
-#         return func() * 2
-#     return wrapper
+salom()
 
 
-#4 - masala
+# 2-masala
+def show_args(func):
+    def wrapper(*args):
+        print(args)
+        return func(*args)
+    return wrapper
 
-# def musbat_s(func):
-#     def wrapper(list):
-#         return func([x for x in lst if > 0])
-#     return wrapper
+@show_args
+def add(a, b):
+    return a + b
 
-#5 masala
-# def counter(func):
-#     count = 0
-#     def wrapper(*args):
-#         nonlocal count
-#         count += 1
-
-#         print(f"funksiya {count} marta chiqarildi")
-#         return func(*args)
-#     return wrapper
-
-#6 - masala
-# def only_even(func):
-#     def wrapper(lst):
-#         return func([x for x in lst if x % 2 == 0])
-#     return wrapper
+print(add(5, 3))
 
 
-# 7 - masala
-# def timer(func):
-#     def wrapper(*args, **kwargs):
-#         start = time.time()
-#         result = func(*args, **kwargs)
-#         end = time.time()
-#         print(f"{end - start:.3f} sekund")
-#         return result
-#     return wrapper
+# 3-masala
+def get_double(func):
+    def wrapper():
+        return func() * 2
+    return wrapper
 
-#8 - Masala
-# def sort_result(func):
-#     def wrapper(*args, **kwargs):
-#         return sorted(func(*args, **kwargs))
-#     return wrapper
+@get_double
+def son():
+    return 10
+
+print(son())
 
 
-#9 - masala
-# def positive(func):
-#     def wrapper(lst):
-#         return func([x for x in lst if x > 0])
-#     return wrapper
+# 4-masala
+def musbat(func):
+    def wrapper(lst):
+        yangi = []
+        for i in lst:
+            if i > 0:
+                yangi.append(i)
+        return func(yangi)
+    return wrapper
+
+@musbat
+def chiqar(lst):
+    return lst
+
+print(chiqar([-2, 5, -1, 7]))
 
 
-# def greater_than_10(func):
-#     def wrapper(lst):
-#         return func([x for x in lst if x > 10])
-#     return wrapper
+# 5-masala
+def counter(func):
+    count = 0
+    def wrapper():
+        nonlocal count
+        count += 1
+        print(count)
+        func()
+    return wrapper
 
-#10 - masala
-# def filter_all(func):
-#     def wrapper(lst):
-#         lst = [x for x in lst if x > 0]
-#         lst = [x for x in lst if x % 2 == 0]
-#         lst = [x for x in lst if x > 10]
-#         return func(lst)
-#     return wrapper
+@counter
+def hello():
+    print("Hello")
 
-
-#11 - masala
-# def slow_warning(func):
-#     def wrapper(*args):
-#         start = time.time()
-#         result = func(*args)
-#         end = time.time()
-
-#         if end - start > 1:
-#             print("Sekin ishlayotgan funksiya!")
-
-#         return result
-#     return wrapper
+hello()
+hello()
+hello()
 
 
-# #12 - masala
-# def to_upper(func):
-#     def wrapper(*args):
-#         return func(*args).upper()
-#     return wrapper
+# 6-masala
+def only_even(func):
+    def wrapper(lst):
+        natija = []
+        for i in lst:
+            if i % 2 == 0:
+                natija.append(i)
+        return func(natija)
+    return wrapper
+
+@only_even
+def sonlar(lst):
+    return lst
+
+print(sonlar([1, 2, 3, 4, 5, 6]))
 
 
-#13 - masala
-# def positive2(func):
-#     def wrapper(lst):
-#         return func([x for x in lst if x > 0])
-#     return wrapper
+# 7-masala
+def timer(func):
+    def wrapper():
+        start = time.time()
+        func()
+        end = time.time()
+        print(end - start)
+    return wrapper
+
+@timer
+def test():
+    time.sleep(2)
+
+test()
 
 
-# def even2(func):
-#     def wrapper(lst):
-#         return func([x for x in lst if x % 2 == 0])
-#     return wrapper
+# 8-masala
+def sort_result(func):
+    def wrapper():
+        return sorted(func())
+    return wrapper
+
+@sort_result
+def sonlar2():
+    return [5, 2, 8, 1]
+
+print(sonlar2())
 
 
-# def square(func):
-#     def wrapper(lst):
-#         return func([x ** 2 for x in lst])
-#     return wrapper
+# 9-masala
+def positive(func):
+    def wrapper(lst):
+        return func([x for x in lst if x > 0])
+    return wrapper
 
-#14 - masala
-# def logger(func):
-#     def wrapper(*args):
-#         start = time.time()
-#         result = func(*args)
-#         end = time.time()
+def greater_10(func):
+    def wrapper(lst):
+        return func([x for x in lst if x > 10])
+    return wrapper
 
-#         print("\nFunksiya:", func.__name__)
-#         print("Args:", args)
-#         print("Natija:", result)
-#         print(f"Vaqt: {end - start:.4f} sekund")
+@positive
+@greater_10
+def test2(lst):
+    return lst
 
-#         return result
-#     return wrapper
+print(test2([-5, 3, 12, 20]))
 
 
-# #15 - masala
-# def only_int(func):
-#     def wrapper(*args):
-#         if not all(isinstance(x, int) for x in args):
-#             print("Xato: faqat integer kerak")
-#             return
-#         return func(*args)
-#     return wrapper
+# 10-masala
+def filter_all(func):
+    def wrapper(lst):
+        natija = []
+        for i in lst:
+            if i > 10 and i % 2 == 0:
+                natija.append(i)
+        return func(natija)
+    return wrapper
+
+@filter_all
+def chiqar2(lst):
+    return lst
+
+print(chiqar2([2, 4, 12, 14, 15, 20]))
 
 
-# #16 - masala
-# def no_negative_result(func):
-#     def wrapper(*args):
-#         result = func(*args)
-#         if result < 0:
-#             print("Xatolik: natija manfiy!")
-#             return
-#         return result
-#     return wrapper
+# 11-masala
+def slow_warning(func):
+    def wrapper():
+        start = time.time()
+        func()
+        end = time.time()
+
+        if end - start > 1:
+            print("Sekin ishladi")
+    return wrapper
+
+@slow_warning
+def test3():
+    time.sleep(2)
+
+test3()
 
 
-# #17 - masala
-# def save_to_file(func):
-#     def wrapper(*args):
-#         result = func(*args)
-#         with open("result.txt", "a") as f:
-#             f.write(str(result) + "\n")
-#         return result
-#     return wrapper
+# 12-masala
+def to_upper(func):
+    def wrapper():
+        return func().upper()
+    return wrapper
+
+@to_upper
+def ism():
+    return "mirzaali"
+
+print(ism())
+
+
+# 13-masala
+def square(func):
+    def wrapper(lst):
+        yangi = []
+        for i in lst:
+            if i > 0 and i % 2 == 0:
+                yangi.append(i ** 2)
+        return func(yangi)
+    return wrapper
+
+@square
+def test4(lst):
+    return lst
+
+print(test4([-5, 2, 4, -1, 6]))
+
+
+# 14-masala
+def logger(func):
+    def wrapper(a, b):
+        start = time.time()
+        result = func(a, b)
+        end = time.time()
+
+        print("Natija:", result)
+        print("Vaqt:", end - start)
+
+        return result
+    return wrapper
+
+@logger
+def kopaytir(a, b):
+    return a * b
+
+kopaytir(5, 4)
+
+
+# 15-masala
+def only_int(func):
+    def wrapper(a, b):
+        if type(a) == int and type(b) == int:
+            return func(a, b)
+
+        print("Faqat int kiriting")
+    return wrapper
+
+@only_int
+def add2(a, b):
+    return a + b
+
+print(add2(5, 10))
+
+
+# 16-masala
+def no_negative(func):
+    def wrapper(a, b):
+        result = func(a, b)
+
+        if result < 0:
+            print("Manfiy son")
+        else:
+            return result
+    return wrapper
+
+@no_negative
+def ayir(a, b):
+    return a - b
+
+print(ayir(10, 5))
+print(ayir(5, 10))
+
+
+# 17-masala
+def save_file(func):
+    def wrapper(x):
+        result = func(x)
+
+        file = open("result.txt", "a")
+        file.write(str(result) + "\n")
+        file.close()
+
+        return result
+    return wrapper
+
+@save_file
+def kvadrat(x):
+    return x * x
+
+print(kvadrat(5))
+print(kvadrat(8))
